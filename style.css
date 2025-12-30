@@ -1,0 +1,580 @@
+:root {
+  --bg: #f4f6f8;
+  --text: #1f2937;
+  --card: #ffffff;
+  --accent: #2563eb;
+}
+
+.dark {
+  --bg: #020617;
+  --text: #e5e7eb;
+  --card: #020617;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ===============================
+   3D GRID ILLUSION BACKGROUND
+   =============================== */
+.tech-grid {
+  position: fixed;
+  inset: -50%;
+  background:
+    linear-gradient(rgba(56,189,248,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.15) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform:
+    perspective(800px)
+    rotateX(60deg)
+    translateY(200px);
+  transform-origin: center;
+  animation: grid3DMove 30s linear infinite;
+  z-index: -3;
+  pointer-events: none;
+  filter: drop-shadow(0 0 12px rgba(56,189,248,0.35));
+}
+
+/* GRID FLOW */
+@keyframes grid3DMove {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 0 300px, 0 300px;
+  }
+}
+
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: var(--card);
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 8%;
+  z-index: 100;
+  box-shadow: 0 5px 15px rgba(0,0,0,.15);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a, nav button {
+  text-decoration: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  background: linear-gradient(135deg,#0f172a,#1e3a8a);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
+  position: relative;
+}
+
+.hero-img {
+  width: 160px;
+  border-radius: 50%;
+  border: 4px solid white;
+  margin-bottom: 20px;
+  animation: float 4s infinite;
+}
+
+@keyframes float {
+  50% { transform: translateY(-12px); }
+}
+
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 14px;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(56,189,248,0.25), transparent 40%),
+    radial-gradient(circle at 50% 60%, rgba(37,99,235,0.18), transparent 50%);
+  animation: heroPulse 10s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes heroPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.hero-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow:
+    0 0 0 3px rgba(56,189,248,0.6),
+    0 0 30px rgba(56,189,248,0.8),
+    0 0 60px rgba(37,99,235,0.6);
+  animation: imgFloat 6s ease-in-out infinite;
+}
+
+@keyframes imgFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.hero h1 {
+  font-size: clamp(36px, 6vw, 54px);
+  letter-spacing: 2px;
+  text-shadow:
+    0 0 12px rgba(56,189,248,0.9),
+    0 0 30px rgba(37,99,235,0.6);
+}
+.hero p {
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  color: #c7d2fe;
+  text-shadow: 0 0 8px rgba(56,189,248,0.4);
+}
+
+.scanline {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(56,189,248,0.08),
+    transparent
+  );
+  animation: scanHero 5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scanHero {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
+.hero h1 {
+  animation: glitchIn 1.2s ease-out;
+}
+
+@keyframes glitchIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+    text-shadow: 2px 0 red, -2px 0 cyan;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    text-shadow:
+      0 0 12px rgba(56,189,248,0.9),
+      0 0 30px rgba(37,99,235,0.6);
+  }
+}
+.hero::after {
+  content: "SYSTEM STATUS : ONLINE";
+  position: absolute;
+  bottom: 30px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #22c55e;
+  text-shadow: 0 0 10px rgba(34,197,94,0.9);
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+
+/* SCANLINE EFFECT */
+.scanline {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,.4);
+  animation: scan 4s infinite;
+}
+
+@keyframes scan {
+  from { top: 0; }
+  to { top: 100%; }
+}
+
+section {
+  padding: 90px 10%;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* SKILLS */
+.skill {
+  display: grid;
+  grid-template-columns: 220px 1fr 50px;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.skill span:first-child {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.bar {
+  background: #d8def5;
+  height: 12px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bar div {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
+  border-radius: 10px;
+  transition: width 0.2s linear;
+}
+
+.percent {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2563eb;
+  text-align: right;
+}
+
+.skill span:first-child {
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* CARD */
+.card {
+  background: var(--card);
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.15);
+  transition: transform .4s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+/* CERT */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 20px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 15px;
+  transition: transform .4s;
+}
+
+.gallery img:hover {
+  transform: scale(1.08);
+}
+
+/* CONTACT */
+form {
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input, textarea {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+}
+
+button {
+  padding: 12px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.wa {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all .9s ease;
+}
+
+/* =====================================
+   FUTURISTIC HUD PROFILE (ABOUT SECTION)
+   ===================================== */
+
+#about {
+  position: relative;
+  max-width: 920px;
+  margin: 140px auto;
+  padding: 50px 55px;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(15,23,42,0.85), rgba(2,6,23,0.85));
+  backdrop-filter: blur(14px);
+  box-shadow:
+    0 0 0 1px rgba(56,189,248,0.18),
+    0 30px 60px rgba(0,0,0,0.6);
+  overflow: hidden;
+}
+
+/* SCANLINE HUD */
+#about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(56,189,248,0.04),
+    rgba(56,189,248,0.04) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  animation: scanMove 6s linear infinite;
+  pointer-events: none;
+}
+
+/* SCAN ANIMATION */
+@keyframes scanMove {
+  from { background-position: 0 0; }
+  to { background-position: 0 120px; }
+}
+
+/* HUD BORDER */
+#about::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(56,189,248,0.25);
+  pointer-events: none;
+}
+
+/* HEADER HUD */
+#about h2 {
+  display: inline-block;
+  position: relative;
+  font-size: 28px;
+  letter-spacing: 1.5px;
+  margin-bottom: 22px;
+}
+
+
+#about h2::before {
+  content: "SYSTEM PROFILE";
+  position: absolute;
+  top: -28px;
+  right: -280px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(56,189,248,0.6);
+}
+
+#about h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #38bdf8, #2563eb);
+  box-shadow: 0 0 16px rgba(56,189,248,0.9);
+}
+
+#about {
+  text-align: center;
+}
+
+/* PROFILE TEXT */
+#about p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: #c7d2fe;
+  text-shadow: 0 0 6px rgba(56,189,248,0.15);
+}
+
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.bar div {
+  transition: width 1.5s ease;
+}
+/* ===============================
+   GLOBAL NEON AMBIENT (FULL PAGE)
+   =============================== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(56,189,248,0.12), transparent 35%),
+    radial-gradient(circle at 85% 70%, rgba(37,99,235,0.10), transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(14,165,233,0.06), transparent 45%);
+  z-index: -1;
+  animation: ambientFlow 18s linear infinite;
+}
+
+/* ===============================
+   NEON FLOW ANIMATION
+   =============================== */
+@keyframes ambientFlow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(8deg); }
+}
+
+/* ===============================
+   SECTION SOFT GLOW
+   =============================== */
+section {
+  position: relative;
+}
+
+section::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 18px;
+  pointer-events: none;
+  z-index: -1;
+  box-shadow:
+    0 0 20px rgba(56,189,248,0.08),
+    0 0 40px rgba(37,99,235,0.06);
+}
+
+/* ===============================
+   HEADING NEON ACCENT
+   =============================== */
+h1, h2 {
+  text-shadow:
+    0 0 8px rgba(56,189,248,0.6),
+    0 0 18px rgba(37,99,235,0.4);
+}
+
+nav h2 {
+  text-shadow:
+    0 0 10px rgba(56,189,248,0.8),
+    0 0 22px rgba(37,99,235,0.6);
+}
+
+/* ===============================
+   SKILL BAR NEON (TETAP ADA)
+   =============================== */
+.bar div {
+  box-shadow:
+    0 0 6px rgba(56,189,248,0.8),
+    0 0 12px rgba(37,99,235,0.6),
+    0 0 24px rgba(37,99,235,0.4);
+}
+#about h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #38bdf8,
+    #2563eb,
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: neonFlow 3s linear infinite;
+}
+
+@keyframes neonFlow {
+  from { background-position: 0% 50%; }
+  to { background-position: 200% 50%; }
+}
+#about h2 {
+  display: inline-block;
+  position: relative;
+}
+
+/* Garis default (belum aktif) */
+#about h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #38bdf8, #2563eb);
+  box-shadow: 0 0 16px rgba(56,189,248,0.9);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s ease-out;
+}
+#about h2.active::after {
+  transform: scaleX(1);
+  background-size: 200% 100%;
+  animation: neonFlow 2.5s linear infinite;
+}
+
+@keyframes neonFlow {
+  from { background-position: 0% 50%; }
+  to { background-position: 200% 50%; }
+}
+
